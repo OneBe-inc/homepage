@@ -45,8 +45,8 @@ export function renderPage(){return `<!doctype html>
 </head><body>
 <a class="skip-link" href="#main">本文へ移動</a>
 <header class="site-header"><div class="header-inner"><a class="brand" href="#top" aria-label="OneBe 定額Webサービス トップ">${logo()}</a>
-<button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="メニューを開く">${icon('menu')}</button>
-<nav id="main-nav" class="main-nav" aria-label="メインメニュー"><a href="#features">特徴</a><a href="#samples">制作イメージ</a><a href="#pricing">料金</a><a href="#faq">よくあるご質問</a>${cta('header')}</nav></div></header>
+<button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="メニューを開く"><span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
+<nav id="main-nav" class="main-nav" aria-label="メインメニュー"><div class="drawer-heading" aria-hidden="true">MENU<span>OneBe 定額Webサービス</span></div><a href="#features">特徴</a><a href="#samples">制作イメージ</a><a href="#pricing">料金</a><a href="#faq">よくあるご質問</a>${cta('header')}</nav></div></header>
 <main id="main">
 <section class="hero" id="top" aria-labelledby="hero-title"><div class="hero-light" aria-hidden="true"></div>
 <div class="hero-copy container"><p class="eyebrow">小さなお店・会社のための定額Webサービス</p><h1 id="hero-title">こだわりまで伝わる、<br>あなただけのホームページ。</h1><p class="hero-description">想い・強みの整理から、公開後の更新・改善まで。</p><p class="hero-price"><span>月額</span><strong>10,000</strong><span>円〜</span><small>［税込］</small></p><p class="hero-cost">初期費用30,000円（税込）／サーバー費別途</p></div>

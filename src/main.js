@@ -5,11 +5,20 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const menuButton = $('.menu-toggle');
   const nav = $('#main-nav');
-  function closeMenu(){nav.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','メニューを開く');}
-  menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');});
+  const menuMedia=window.matchMedia('(max-width: 800px)');
+  function setMenu(open){
+    nav.classList.toggle('is-open',open);
+    menuButton.setAttribute('aria-expanded',String(open));
+    menuButton.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');
+    nav.inert=menuMedia.matches&&!open;
+  }
+  function closeMenu(){setMenu(false);}
+  menuButton.addEventListener('click',()=>setMenu(!nav.classList.contains('is-open')));
   nav.addEventListener('click',event=>{if(event.target.closest('a'))closeMenu();});
-  document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&nav.classList.contains('is-open')){closeMenu();menuButton.focus();}});
   document.addEventListener('click',event=>{if(!event.target.closest('.site-header'))closeMenu();});
+  menuMedia.addEventListener('change',closeMenu);
+  closeMenu();
   // Native horizontal scrolling drives a circular arc in 3D space.
   const viewport=$('.carousel-viewport'), showcase=$('.showcase');
   const pause=$('[data-pause]'), spin=$('[data-spin]');
