@@ -118,7 +118,33 @@
   let lastFocus=null;
   const categories={sola:'restaurant',lumiere:'salon',kokoro:'retail',atelier:'architecture',komorebi:'restaurant',nagi:'wellness',table:'restaurant',luce:'salon',natura:'retail'};
   function closeDialog(){dialog.close();}
-  $$('.sample-trigger').forEach(button=>button.addEventListener('click',()=>{if(suppressClick)return;const sampleId=button.dataset.sample;const title=button.dataset.title;$('#dialog-title').textContent=title;$('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();preview.replaceChildren($('.sample-screen',button).cloneNode(true));lastFocus=button;document.body.classList.add('modal-open');dialog.showModal();document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category:categories[sampleId]}}));}));
+  const designNotes={
+    sola:['ふわっと、とろっと。お店の魅力がひと目で伝わる、あたたかなレストランサイト。',['食欲を誘うイエローと、明るい店内写真','メニューや予約へ迷わず進める導線','親しみやすい文字と、ゆったりした余白']],
+    salon:['自分らしい美しさに出会う。写真と余白でサロンの空気感を伝えるデザイン。',['ヘアスタイルが主役になる写真','上品でやわらかな色づかい','サロンの魅力を伝えるシンプルな構成']],
+    retail:['好きなものに囲まれる暮らしを。商品とお店の世界観を丁寧に届けるデザイン。',['商品の質感が伝わるビジュアル','暮らしに馴染むナチュラルな配色','読み進めたくなる、心地よい余白']],
+    architecture:['暮らしの風景から、空間への想いまで。建築の魅力を静かに伝えるデザイン。',['空間を大きく見せる写真','素材の温もりに合う落ち着いた配色','作品の印象を引き立てる文字組み']],
+    restaurant:['料理と空間、その両方を味わう。お店で過ごす時間を想像できるデザイン。',['料理の魅力が伝わるメイン写真','お店の雰囲気を映す色づかい','メニューへ自然につながる構成']],
+    wellness:['ひと息つける場所を、画面の中にも。やすらぎを感じるリラクゼーションのデザイン。',['やわらかな光と自然のイメージ','深呼吸できるような余白','落ち着きのある、やさしい配色']]
+  };
+  const sampleButtons=$$('.sample-trigger');let currentSample=0;
+  function renderSample(index){
+    currentSample=wrap(index,sampleButtons.length);const button=sampleButtons[currentSample];
+    const sampleId=button.dataset.sample,category=categories[sampleId];
+    const notes=designNotes[sampleId]||designNotes[category];
+    $('#dialog-title').textContent=button.dataset.title;
+    $('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();
+    $('.dialog-description').textContent=notes[0];
+    $('.dialog-points ul').replaceChildren(...notes[1].map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+    $('.dialog-number').textContent=String(currentSample+1).padStart(2,'0');
+    const visit=$('.dialog-visit');let target=null;
+    try{const url=new URL(button.dataset.url);if(url.protocol==='https:')target=url.href;}catch{}
+    visit.hidden=!target;if(target)visit.href=target;else visit.removeAttribute('href');
+    preview.replaceChildren($('.sample-screen',button).cloneNode(true));
+    document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category}}));
+  }
+  sampleButtons.forEach((button,index)=>button.addEventListener('click',()=>{if(suppressClick)return;renderSample(index);lastFocus=button;document.body.classList.add('modal-open');dialog.showModal();}));
+  $('.dialog-prev').addEventListener('click',()=>renderSample(currentSample-1));
+  $('.dialog-next').addEventListener('click',()=>renderSample(currentSample+1));
   $('.dialog-close').addEventListener('click',closeDialog);
   dialog.addEventListener('click',event=>{if(event.target===dialog){const bounds=dialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)closeDialog();}});
   dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');lastFocus?.focus({preventScroll:true});});

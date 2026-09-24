@@ -79,6 +79,8 @@ async function assetReference(value, base, evidence, kind = 'asset') {
     check('V11.URL_PROTOCOL', base, false, 'http(s), mailto, tel, or in-page URL', url.protocol, evidence);
     return;
   }
+  // This separate GitHub Pages project is the user-provided live demo.
+  if(kind === 'link' && url.origin === 'https://onebe-inc.github.io' && url.pathname === '/sample_food1/') { remoteReferences.add(url.href); return; }
   let path;
   try { path = localFile(url); } catch (error) {
     check('V05.PROJECT_PATH', base, false, 'Local URLs resolve inside /homepage/', error.message, evidence);

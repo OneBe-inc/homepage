@@ -1,5 +1,5 @@
 export const site = {
-  name: 'OneBe', url: 'https://onebe-inc.github.io/homepage/', updated: '2026-09-24',
+  name: 'OneBe', url: 'https://onebe-inc.github.io/homepage/', updated: '2026-09-25',
   contact: 'https://lin.ee/rF35Qat',
   company: 'https://onebe-create.com/', privacy: 'https://onebe-create.com/privacy/'
 };
@@ -10,7 +10,7 @@ export const plans = [
   {id:'premium', name:'Premium', price:20000, pages:'7〜12ページ', intro:'多くの情報を整理して、\nしっかり伝えたい方へ'}
 ];
 export const samples = [
- {id:'sola',name:'ワンビー食堂',category:'restaurant',label:'オムライス専門店',screenshot:'onebe-restaurant.png',image:'industry-photos.webp',crop:'coffee',headline:'やすらぎの\nひとときを、\n日常に。',sub:'一杯のコーヒーからはじまる、小さな幸せ。',action:'OUR CONCEPT',theme:'coffee'},
+ {id:'sola',url:'https://onebe-inc.github.io/sample_food1/',name:'ワンビー食堂',category:'restaurant',label:'オムライス専門店',screenshot:'onebe-restaurant.png',image:'industry-photos.webp',crop:'coffee',headline:'やすらぎの\nひとときを、\n日常に。',sub:'一杯のコーヒーからはじまる、小さな幸せ。',action:'OUR CONCEPT',theme:'coffee'},
  {id:'lumiere',name:'Lumière',category:'salon',label:'ヘアサロン',image:'salon-portrait.webp',headline:'あなたらしさを、\nもっと美しく。',sub:'わたしに戻れる、心地よい場所。',action:'サロンについて',theme:'salon'},
  {id:'kokoro',name:'kokoro select',category:'retail',label:'暮らしの雑貨',image:'industry-photos.webp',crop:'retail',headline:'お気に入りで\nつくる、\n心地よい毎日。',sub:'暮らしに、小さな彩りを。',action:'COLLECTION',theme:'retail'},
  {id:'atelier',name:'atelier.',category:'architecture',label:'建築・インテリア',image:'architecture.webp',headline:'暮らしと、ともに。',sub:'いつまでも愛せる空間を、あなたと。',action:'OUR WORKS',theme:'architecture'},
