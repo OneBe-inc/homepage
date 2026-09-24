@@ -84,7 +84,7 @@
   document.addEventListener('click', click => {
     const target = click.target instanceof Element ? click.target.closest('[data-contact]') : null;
     if (!target || !contactLocations.has(target.dataset.location)) return;
-    event('contact_click', { contact_type: 'consultation', cta_location: target.dataset.location });
+    event('contact_click', { contact_type: 'consultation', contact_channel: 'line', cta_location: target.dataset.location });
   });
   document.addEventListener('onebe:sample-detail', sampleEvent => {
     const detail = sampleEvent.detail;
