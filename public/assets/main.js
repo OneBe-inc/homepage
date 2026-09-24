@@ -133,13 +133,17 @@
     const notes=designNotes[sampleId]||designNotes[category];
     $('#dialog-title').textContent=button.dataset.title;
     $('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();
-    $('.dialog-description').textContent=notes[0];
-    $('.dialog-points ul').replaceChildren(...notes[1].map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+    $('.dialog-description').textContent=sampleId==='sola'?'おいしさと、お店の空気まで伝わる。':notes[0];
+
     $('.dialog-number').textContent=String(currentSample+1).padStart(2,'0');
     const visit=$('.dialog-visit');let target=null;
     try{const url=new URL(button.dataset.url);if(url.protocol==='https:')target=url.href;}catch{}
     visit.hidden=!target;if(target)visit.href=target;else visit.removeAttribute('href');
     preview.replaceChildren($('.sample-screen',button).cloneNode(true));
+    const desktop=$('.desktop-preview');
+    if(sampleId==='sola'){
+      const img=document.createElement('img');img.src='assets/onebe-restaurant-desktop.png';img.alt='ワンビー食堂のPC版デザイン';img.width=1448;img.height=1086;desktop.replaceChildren(img);
+    }else{desktop.replaceChildren($('.sample-screen',button).cloneNode(true));}
     document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category}}));
   }
   sampleButtons.forEach((button,index)=>button.addEventListener('click',()=>{if(suppressClick)return;renderSample(index);lastFocus=button;document.body.classList.add('modal-open');dialog.showModal();}));
