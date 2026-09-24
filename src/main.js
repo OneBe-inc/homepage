@@ -41,7 +41,6 @@
   dialog.addEventListener('click',event=>{if(event.target===dialog){const bounds=dialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)closeDialog();}});
   dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');lastFocus?.focus({preventScroll:true});});
   const mobile=$('.mobile-cta'), hero=$('.hero');
-  new IntersectionObserver(([entry])=>{mobile.classList.toggle('visible',!entry.isIntersecting&&entry.boundingClientRect.top<0);},{threshold:0}).observe(hero);
+  new IntersectionObserver(([entry])=>{const visible=!entry.isIntersecting&&entry.boundingClientRect.top<0;mobile.classList.toggle('visible',visible);mobile.setAttribute('aria-hidden',String(!visible));mobile.tabIndex=visible?0:-1;},{threshold:0}).observe(hero);
   motionState();updateArrows();
 })();
-
