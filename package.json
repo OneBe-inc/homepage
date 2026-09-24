@@ -1,0 +1,16 @@
+{
+  "name": "onebe-homepage-service",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "check:aio:static": "node scripts/check.mjs",
+    "check:aio:http": "node scripts/check.mjs --url https://onebe-inc.github.io/homepage/"
+  },
+  "devDependencies": {
+    "fast-xml-parser": "^5.0.0",
+    "parse5": "^8.0.0"
+  }
+}

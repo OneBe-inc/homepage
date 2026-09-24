@@ -1,0 +1,71 @@
+import {site,plans,inclusions,samples,services,faqs} from './data.mjs';
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const lines=s=>esc(s).replaceAll('\n','<br>');
+const paths={
+ arrow:'M5 12h14m-6-6 6 6-6 6',chevron:'m9 5 7 7-7 7',
+ pen:'m16 3 5 5-12 12-6 1 1-6L16 3ZM13 6l5 5M4 15l5 5',
+ refresh:'M20 7v5h-5M4 17v-5h5M5.6 7a8 8 0 0 1 13.8-1L20 12M4 12l.6 6a8 8 0 0 0 13.8-1',
+ headset:'M4 14v-3a8 8 0 0 1 16 0v3M4 12H2v7h4v-7H4ZM20 12h2v7h-4v-7h2ZM20 19v2h-6',
+ talk:'M14 15H9l-5 4v-5a7 7 0 1 1 10 1ZM15 9a6 6 0 0 1 5 10v3l-4-3h-3',
+ screen:'M3 3h18v13H3zM8 21h8m-4-5v5M17 9h6v12h-6z',
+ chart:'M3 15h4v7H3zM10 9h4v13h-4zM17 2h4v20h-4z',
+ mail:'M3 5h18v14H3zM3 5l9 8 9-8',
+ doc:'M5 2h10l4 4v16H5zM14 2v5h5M8 11h8m-8 4h8m-8 4h5',
+ check:'m5 12 4 4L20 5',pause:'M8 5v14M16 5v14',play:'m8 4 12 8-12 8z',rotate:'M20 8a8 8 0 1 0 0 8M20 3v5h-5',
+ close:'m6 6 12 12M6 18 18 6',menu:'M3 6h18M3 12h18M3 18h18'};
+export const icon=(name,cls='')=>'<svg class="icon '+cls+'" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="'+paths[name]+'"/></svg>';
+const cta=(location,label='まずは無料相談する',cls='')=>'<a class="button '+cls+'" data-contact data-location="'+location+'" href="'+site.contact+'"><span>'+label+'</span>'+icon('arrow')+'</a>';
+const logo=(cls='')=>'<img class="brand-logo '+cls+'" src="assets/onebe-logo.png" width="467" height="112" alt="OneBe">';
+const image=(s)=>s.crop?'<span class="sample-photo crop-'+s.crop+'" role="img" aria-label="'+esc(s.label)+'の制作イメージ"></span>':'<img class="sample-photo" src="assets/'+s.image+'" width="480" height="640" alt="'+esc(s.label)+'の制作イメージ" decoding="async">';
+const screen=(s)=>'<span class="sample-screen theme-'+s.theme+'"><span class="sample-status"><span>9:41</span><span>▮▮▮ ▰</span></span><span class="sample-nav"><b>'+s.name+'</b><span class="sample-menu">☰</span></span><span class="sample-main">'+image(s)+'<span class="sample-copy"><strong>'+lines(s.headline)+'</strong><small>'+esc(s.sub)+'</small><span class="sample-cta">'+s.action+'</span></span></span><span class="sample-bottom">SCROLL TO DISCOVER <span>↓</span></span></span>';
+const phone=(s,i)=>'<li class="sample-item"><button class="sample-trigger" data-sample="'+s.id+'" aria-label="'+s.label+'のサンプル「'+s.name+'」を拡大"><span class="phone-float" style="--order:'+i+'"><span class="phone"><span class="phone-back" aria-hidden="true"><span class="camera-cluster"><i></i><i></i><i></i></span><span>OneBe</span></span><span class="phone-front">'+screen(s)+'<span class="island" aria-hidden="true"></span></span></span></span><span class="sample-caption">'+s.label+'<span>'+icon('arrow')+'</span></span></button></li>';
+const schema={
+ '@context':'https://schema.org','@graph':[
+ {'@type':'Organization','@id':site.company+'#organization',name:'OneBe',url:site.company,logo:site.url+'assets/onebe-logo.png'},
+ {'@type':'WebPage','@id':site.url+'#webpage',url:site.url,name:'定額ホームページ制作・運用｜OneBe',description:'小さなお店・会社のための定額Webサービス。想い・強みの整理から、オリジナル制作、公開後の更新・改善まで。',inLanguage:'ja',dateModified:site.updated,about:{'@id':site.url+'#service'}},
+ {'@type':'Service','@id':site.url+'#service',name:'OneBe 定額Webサービス',url:site.url,provider:{'@id':site.company+'#organization'},serviceType:'ホームページ制作・運用',description:'ヒアリング・強みの整理、構成設計、オリジナルデザイン、月5回までの軽微な修正・更新、改善レポート。初期費用30,000円（税込）、サーバー費別途。最低契約期間は公開日から6か月。',offers:plans.map(p=>({'@type':'Offer',name:p.name,url:site.url+'#plan-'+p.id,price:p.price,priceCurrency:'JPY',description:p.pages+'。月額・税込。初期費用30,000円、サーバー費別途。',priceSpecification:{'@type':'UnitPriceSpecification',price:p.price,priceCurrency:'JPY',unitText:'月',valueAddedTaxIncluded:true}}))}
+ ]};
+export function renderPage(){return `<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>定額ホームページ制作・運用｜月額10,000円から｜OneBe</title>
+<meta name="description" content="小さなお店・会社のためのOneBe定額Webサービス。想い・強みの整理からオリジナル制作、月5回までの軽微な更新、改善レポートまで。月額10,000円〜税込、初期費用30,000円・サーバー費別途。">
+<meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#111c38">
+<link rel="canonical" href="${site.url}"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:locale" content="ja_JP"><meta property="og:site_name" content="OneBe">
+<meta property="og:title" content="こだわりまで伝わる、あなただけのホームページ。｜OneBe">
+<meta property="og:description" content="想い・強みの整理から、公開後の更新・改善まで。OneBeの定額Webサービス。月額10,000円〜税込。">
+<meta property="og:url" content="${site.url}"><meta property="og:image" content="${site.url}assets/ogp.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/salon-portrait.webp">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">${JSON.stringify(schema)}</script>
+<script defer src="assets/main.js"></script><script defer src="assets/analytics.js"></script>
+</head><body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="#top" aria-label="OneBe 定額Webサービス トップ">${logo()}</a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="メニューを開く">${icon('menu')}</button>
+<nav id="main-nav" class="main-nav" aria-label="メインメニュー"><a href="#features">特徴</a><a href="#samples">制作イメージ</a><a href="#pricing">料金</a><a href="#faq">よくあるご質問</a>${cta('header')}</nav></div></header>
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-title"><div class="hero-light" aria-hidden="true"></div>
+<div class="hero-copy container"><p class="eyebrow">小さなお店・会社のための定額Webサービス</p><h1 id="hero-title">こだわりまで伝わる、<br>あなただけのホームページ。</h1><p class="hero-description">想い・強みの整理から、公開後の更新・改善まで。</p><p class="hero-price"><span>月額</span><strong>10,000</strong><span>円〜</span><small>［税込］</small></p><p class="hero-cost">初期費用30,000円（税込）／サーバー費別途</p></div>
+<div class="showcase" role="group" id="samples" aria-label="制作サンプル"><div class="carousel-viewport" role="group" tabindex="0" aria-label="制作サンプル一覧。横スクロール、または左右の矢印キーで移動できます。"><ul class="sample-track">${samples.map(phone).join('')}</ul></div>
+<div class="carousel-bottom container"><p class="sample-notice">制作イメージ <span>／ ドラッグ・スワイプでご覧いただけます</span></p><div class="carousel-controls"><button class="icon-button" data-prev aria-label="前のサンプル">${icon('arrow','reverse')}</button><button class="text-control" data-spin>${icon('rotate')}<span>回転して見る</span></button><button class="icon-button" data-pause aria-pressed="false" aria-label="スマホの動きを停止">${icon('pause')}</button><button class="icon-button" data-next aria-label="次のサンプル">${icon('arrow')}</button></div></div></div></section>
+<section class="benefits" aria-label="サービスのポイント"><div class="benefit-row container"><div>${icon('pen')}<p>オリジナル制作</p></div><div>${icon('refresh')}<p>月5回までの<br>修正・更新</p></div><div>${icon('headset')}<p>公開後も<br>伴走サポート</p></div></div>${cta('hero')}</section>
+<section class="story section container" id="features" aria-labelledby="story-title"><div class="story-grid"><div><p class="section-eyebrow">YOUR WEB PARTNER</p><h2 id="story-title">制作も、更新も。<br>頼れるWeb担当者を。</h2><p class="story-text">OneBeは、ビジネスの想いや強みを丁寧に整理し、<br class="desktop-break">あなただけのオリジナルホームページを制作。<br class="desktop-break">公開後も、更新・改善まで継続してサポートします。</p></div>
+<div class="desktop-mockup" role="img" aria-label="カフェの制作イメージ"><div class="laptop"><div class="laptop-screen"><div class="demo-header"><b>Sola Cafe</b><span>HOME　CONCEPT　MENU　ACCESS</span></div><div class="demo-body"><div class="demo-photo"></div><div class="demo-copy"><strong>好きなことで、<br>人が集まる場所を。</strong><small>一杯のコーヒーから、心地よい時間を。</small><span>OUR STORY　→</span></div></div></div><div class="laptop-base"></div></div><div class="mini-phone">${screen(samples[0])}<span class="island"></span></div><p class="image-caption">制作イメージ</p></div></div>
+<div class="value-steps"><div><span>01</span><div><h3>強みを整理</h3><p>ビジネスの想いや強みを一緒に整理し、言葉にします。</p></div></div><div><span>02</span><div><h3>オリジナルで制作</h3><p>整理した内容をもとに、あなただけのホームページを制作。</p></div></div><div><span>03</span><div><h3>公開後も伴走</h3><p>月5回までの更新・修正と、改善のご提案で継続してサポート。</p></div></div></div></section>
+<section class="services section" id="services" aria-labelledby="services-title"><div class="container"><div class="section-heading"><p class="section-eyebrow">SERVICE</p><h2 id="services-title">ホームページのことを、<br class="mobile-break">まとめて相談。</h2><p>制作から公開後まで、必要なことをひとつの窓口で支援します。</p></div><div class="service-grid">${services.map(s=>'<article class="service-card">'+icon(s.icon)+'<h3>'+s.title+'</h3><p>'+s.text+'</p></article>').join('')}</div><div class="center">${cta('services')}</div></div></section>
+<section class="pricing section container" id="pricing" aria-labelledby="pricing-title"><div class="section-heading"><p class="section-eyebrow">PRICE</p><h2 id="pricing-title">事業に合わせて選べる、<br class="mobile-break">3つのプラン。</h2><p>制作から、公開後の更新・改善まで。</p></div>
+<div class="plan-grid">${plans.map(p=>'<article id="plan-'+p.id+'" class="plan '+p.id+'" data-plan-price="'+p.price+'" data-plan-currency="JPY"><h3>'+p.name+'</h3><div class="plan-content"><p class="plan-price"><span>月額</span><strong>'+p.price.toLocaleString('ja-JP')+'</strong><span>円</span></p><p class="tax">税込</p><p class="pages">'+p.pages+'</p><p class="plan-intro">'+lines(p.intro)+'</p><div class="plan-includes"><h4>プランに含まれるもの</h4><ul>'+inclusions.map(x=>'<li>'+icon('check')+'<span>'+x+'</span></li>').join('')+'</ul></div>'+cta('pricing-'+p.id,'このプランを相談する','button-plan')+'</div></article>').join('')}</div>
+<div class="pricing-notes"><p><strong>初期費用 30,000円（税込）</strong><span class="note-divider">／</span>サーバー費別途</p><p>最低契約期間：公開日から6か月</p><p>更新は同一ページ・同一目的の軽微な修正を1回と数えます。<br>大幅な変更・機能追加は対象外。別途ご相談ください。</p></div><p class="price-date">料金・サービス内容：2026年9月24日時点</p></section>
+<section class="flow-faq section container"><div class="flow"><p class="section-eyebrow">FLOW</p><h2>ご利用の流れ</h2><p class="muted">はじめての方でも安心。<br>シンプルな流れで進めます。</p><ol class="flow-steps"><li><span class="flow-icon">${icon('mail')}</span><span class="step-no">01</span><h3>ご相談</h3><p>まずはお気軽に。<br>お店のこと、Webのことをお聞かせください。</p></li><li><span class="flow-icon">${icon('doc')}</span><span class="step-no">02</span><h3>ヒアリング</h3><p>事業の想いや強みを丁寧にヒアリングします。</p></li><li><span class="flow-icon">${icon('screen')}</span><span class="step-no">03</span><h3>制作・公開</h3><p>デザイン・制作を進め、ご確認・承認後に公開します。</p></li><li><span class="flow-icon">${icon('chart')}</span><span class="step-no">04</span><h3>更新・改善</h3><p>公開後も更新・修正と改善提案でサポートします。</p></li></ol></div>
+<div class="faq" id="faq"><p class="section-eyebrow">FAQ</p><h2>よくあるご質問</h2><div class="faq-list">${faqs.map(([q,a])=>'<details><summary><span class="q-mark" aria-hidden="true">Q</span><span>'+q+'</span><span class="faq-plus" aria-hidden="true"></span></summary><div class="faq-answer"><p>'+a+'</p></div></details>').join('')}</div></div></section>
+<section class="closing" id="contact" aria-labelledby="closing-title"><div class="container"><p class="section-eyebrow">LET’S TALK</p><h2 id="closing-title">その想いを、<br class="mobile-break">次のお客様へ。</h2><p>ビジネスの魅力をカタチにするホームページを、OneBeと一緒に。</p>${cta('closing','まずは無料相談する','button-light')}</div></section>
+</main>
+<footer class="site-footer"><div class="container"><div class="footer-top"><a class="brand" href="#top">${logo()}</a><nav aria-label="フッターメニュー"><a href="#features">特徴</a><a href="#samples">制作イメージ</a><a href="#pricing">料金</a><a href="${site.company}">運営者について</a><a href="${site.privacy}">プライバシーポリシー</a></nav></div><div class="footer-bottom"><p>掲載しているサイト・写真は制作イメージです。<br class="mobile-break">実際の制作実績・顧客を示すものではありません。</p><small>© 2026 OneBe</small></div></div></footer>
+<a class="mobile-cta" href="${site.contact}" data-contact data-location="mobile">まずは無料相談する${icon('arrow')}</a>
+<dialog class="sample-dialog" aria-labelledby="dialog-title"><div class="dialog-inner"><button class="dialog-close icon-button" aria-label="サンプルを閉じる">${icon('close')}</button><div class="dialog-copy"><p class="section-eyebrow">DESIGN SAMPLE</p><h2 id="dialog-title">制作サンプル</h2><p class="dialog-category"></p><p>事業の世界観に合わせた、<br>ホームページの制作イメージです。</p><p class="muted">掲載内容は架空のサンプルです。</p><a class="button" href="${site.contact}" data-contact data-location="sample">このようなサイトを相談する${icon('arrow')}</a></div><div class="dialog-preview"></div></div></dialog>
+</body></html>`;}
+
+
