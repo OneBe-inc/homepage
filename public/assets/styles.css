@@ -64,3 +64,8 @@
  .main-nav .button{width:100%;min-height:52px;margin-top:30px;flex-shrink:0;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.faq details[open]>.faq-answer{animation:none}.main-nav,.menu-lines i{transition:none}}
+
+/* Supplied website capture fills the existing phone screen. */
+.sample-screen.screenshot-screen{display:block;overflow:hidden;background:#fff8d0}.screenshot-screen>img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+
+.screenshot-screen>.sample-status{height:28px;min-height:28px;background:#fff}.screenshot-screen>img{height:calc(100% - 28px);object-fit:contain;object-position:top;background:#fff8d0}

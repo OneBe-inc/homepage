@@ -116,9 +116,9 @@
 
   const dialog=$('.sample-dialog'), preview=$('.dialog-preview');
   let lastFocus=null;
-  const categories={sola:'cafe',lumiere:'salon',kokoro:'retail',atelier:'architecture',komorebi:'restaurant',nagi:'wellness',table:'restaurant',luce:'salon',natura:'retail'};
+  const categories={sola:'restaurant',lumiere:'salon',kokoro:'retail',atelier:'architecture',komorebi:'restaurant',nagi:'wellness',table:'restaurant',luce:'salon',natura:'retail'};
   function closeDialog(){dialog.close();}
-  $$('.sample-trigger').forEach(button=>button.addEventListener('click',()=>{if(suppressClick)return;const sampleId=button.dataset.sample;const title=$('.sample-nav b',button).textContent;$('#dialog-title').textContent=title;$('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();preview.replaceChildren($('.sample-screen',button).cloneNode(true));lastFocus=button;document.body.classList.add('modal-open');dialog.showModal();document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category:categories[sampleId]}}));}));
+  $$('.sample-trigger').forEach(button=>button.addEventListener('click',()=>{if(suppressClick)return;const sampleId=button.dataset.sample;const title=button.dataset.title;$('#dialog-title').textContent=title;$('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();preview.replaceChildren($('.sample-screen',button).cloneNode(true));lastFocus=button;document.body.classList.add('modal-open');dialog.showModal();document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category:categories[sampleId]}}));}));
   $('.dialog-close').addEventListener('click',closeDialog);
   dialog.addEventListener('click',event=>{if(event.target===dialog){const bounds=dialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)closeDialog();}});
   dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');lastFocus?.focus({preventScroll:true});});
