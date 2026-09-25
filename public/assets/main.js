@@ -116,7 +116,7 @@
 
   const dialog=$('.sample-dialog'), preview=$('.dialog-preview');
   let lastFocus=null;
-  const categories={sola:'restaurant',lumiere:'salon',kokoro:'retail',atelier:'architecture',komorebi:'restaurant',nagi:'wellness',table:'restaurant',luce:'salon',natura:'retail'};
+  const categories={sola:'restaurant',onebesalon:'salon',kokoro:'retail',atelier:'architecture',komorebi:'restaurant',nagi:'wellness',table:'restaurant',luce:'salon',natura:'retail'};
   function closeDialog(){dialog.close();}
   const designNotes={
     sola:['ふわっと、とろっと。お店の魅力がひと目で伝わる、あたたかなレストランサイト。',['食欲を誘うイエローと、明るい店内写真','メニューや予約へ迷わず進める導線','親しみやすい文字と、ゆったりした余白']],
@@ -133,7 +133,7 @@
     const notes=designNotes[sampleId]||designNotes[category];
     $('#dialog-title').textContent=button.dataset.title;
     $('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();
-    $('.dialog-description').textContent=sampleId==='sola'?'おいしさと、お店の空気まで伝わる。':sampleId==='komorebi'?'一杯の迫力と、お店のこだわりを伝える。':notes[0];
+    $('.dialog-description').textContent=sampleId==='sola'?'おいしさと、お店の空気まで伝わる。':sampleId==='komorebi'?'一杯の迫力と、お店のこだわりを伝える。':sampleId==='onebesalon'?'髪が整うと、わたしが整う。':notes[0];
 
     $('.dialog-number').textContent=String(currentSample+1).padStart(2,'0');
     const visit=$('.dialog-visit');let target=null;
@@ -141,8 +141,8 @@
     visit.hidden=!target;if(target)visit.href=target;else visit.removeAttribute('href');
     preview.replaceChildren($('.sample-screen',button).cloneNode(true));
     const desktop=$('.desktop-preview');
-    if(sampleId==='sola'||sampleId==='komorebi'){
-      const img=document.createElement('img');const ramen=sampleId==='komorebi';img.src=ramen?'assets/udebiya-desktop.png':'assets/onebe-restaurant-desktop.png';img.alt=button.dataset.title+'のPC版デザイン';img.width=ramen?1671:1448;img.height=ramen?941:1086;img.style.objectFit=ramen?'contain':'cover';img.style.background=ramen?'#080808':'';desktop.replaceChildren(img);
+    if(['sola','komorebi','onebesalon'].includes(sampleId)){
+      const img=document.createElement('img');const ramen=sampleId==='komorebi',salon=sampleId==='onebesalon';img.src=salon?'assets/onebe-salon-desktop.png':ramen?'assets/udebiya-desktop.png':'assets/onebe-restaurant-desktop.png';img.alt=button.dataset.title+'のPC版デザイン';img.width=salon?1440:ramen?1671:1448;img.height=salon?677:ramen?941:1086;img.style.objectFit=ramen||salon?'contain':'cover';img.style.background=ramen?'#080808':'';desktop.replaceChildren(img);
     }else{desktop.replaceChildren($('.sample-screen',button).cloneNode(true));}
     document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category}}));
   }

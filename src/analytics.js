@@ -54,7 +54,7 @@
     'pricing-premium', 'closing', 'mobile', 'sample'
   ]);
   const sampleIds = new Set([
-    'sola', 'lumiere', 'kokoro', 'atelier', 'komorebi', 'nagi', 'table', 'luce', 'natura'
+    'sola', 'onebesalon', 'kokoro', 'atelier', 'komorebi', 'nagi', 'table', 'luce', 'natura'
   ]);
   const categories = new Set(['cafe', 'salon', 'retail', 'architecture', 'restaurant', 'wellness']);
 

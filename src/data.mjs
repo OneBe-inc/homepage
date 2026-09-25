@@ -11,10 +11,10 @@ export const plans = [
 ];
 export const samples = [
  {id:'sola',url:'https://onebe-inc.github.io/sample_food1/',name:'ワンビー食堂',category:'restaurant',label:'オムライス専門店',screenshot:'onebe-restaurant.png',image:'industry-photos.webp',crop:'coffee',headline:'やすらぎの\nひとときを、\n日常に。',sub:'一杯のコーヒーからはじまる、小さな幸せ。',action:'OUR CONCEPT',theme:'coffee'},
- {id:'lumiere',name:'Lumière',category:'salon',label:'ヘアサロン',image:'salon-portrait.webp',headline:'あなたらしさを、\nもっと美しく。',sub:'わたしに戻れる、心地よい場所。',action:'サロンについて',theme:'salon'},
+ {id:'komorebi',name:'腕火屋',url:'https://onebe-inc.github.io/sample_food2/',category:'restaurant',label:'ラーメン店',screenshot:'udebiya-mobile.png',screenWidth:941,screenHeight:1672,dark:true,image:'seasonal.webp',headline:'季節を味わう、\nしあわせな時間。',sub:'いつもの日に、ちょっといい食卓を。',action:'お品書き',theme:'restaurant'},
+ {id:'onebesalon',name:'OneBeSalon',url:'https://onebe-inc.github.io/sample_salon2/',category:'salon',label:'ヘアサロン',screenshot:'onebe-salon-mobile.png',screenWidth:390,screenHeight:850,image:'salon-portrait.webp',theme:'salon'},
  {id:'kokoro',name:'kokoro select',category:'retail',label:'暮らしの雑貨',image:'industry-photos.webp',crop:'retail',headline:'お気に入りで\nつくる、\n心地よい毎日。',sub:'暮らしに、小さな彩りを。',action:'COLLECTION',theme:'retail'},
  {id:'atelier',name:'atelier.',category:'architecture',label:'建築・インテリア',image:'architecture.webp',headline:'暮らしと、ともに。',sub:'いつまでも愛せる空間を、あなたと。',action:'OUR WORKS',theme:'architecture'},
- {id:'komorebi',name:'腕火屋',url:'https://onebe-inc.github.io/sample_food2/',category:'restaurant',label:'ラーメン店',screenshot:'udebiya-mobile.png',screenWidth:941,screenHeight:1672,dark:true,image:'seasonal.webp',headline:'季節を味わう、\nしあわせな時間。',sub:'いつもの日に、ちょっといい食卓を。',action:'お品書き',theme:'restaurant'},
  {id:'nagi',name:'nagi',category:'wellness',label:'リラクゼーション',image:'industry-photos.webp',crop:'spa',headline:'深呼吸する、\nわたしの時間。',sub:'からだと心を、ゆっくり整える。',action:'TREATMENT',theme:'spa'},
  {id:'table',name:'TABLE',category:'restaurant',label:'ダイニング',image:'restaurant.webp',headline:'この一皿から、\n会話がはじまる。',sub:'記憶に残る、おいしいひととき。',action:'MENU',theme:'dining'},
  {id:'luce',name:'Luce hair',category:'salon',label:'美容室',image:'salon-short.webp',headline:'毎日に、\nわたしらしい風を。',sub:'あなたの魅力に、そっと寄り添う。',action:'STYLE GALLERY',theme:'salon2'},
