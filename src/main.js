@@ -142,7 +142,7 @@
     preview.replaceChildren($('.sample-screen',button).cloneNode(true));
     const desktop=$('.desktop-preview');
     if(['sola','komorebi','onebesalon'].includes(sampleId)){
-      const img=document.createElement('img');const ramen=sampleId==='komorebi',salon=sampleId==='onebesalon';img.src=salon?'assets/onebe-salon-desktop.png':ramen?'assets/udebiya-desktop.png':'assets/onebe-restaurant-desktop.png';img.alt=button.dataset.title+'のPC版デザイン';img.width=salon?1440:ramen?1671:1448;img.height=salon?677:ramen?941:1086;img.style.objectFit=ramen||salon?'contain':'cover';img.style.background=ramen?'#080808':'';desktop.replaceChildren(img);
+      const img=document.createElement('img');const ramen=sampleId==='komorebi',salon=sampleId==='onebesalon';img.src=salon?'assets/salon-desktop-fit.png':ramen?'assets/ramen-desktop-fit.png':'assets/omelette-desktop-fit.png';img.alt=button.dataset.title+'のPC版デザイン';img.width=1440;img.height=948;img.style.objectFit='cover';desktop.replaceChildren(img);
     }else{desktop.replaceChildren($('.sample-screen',button).cloneNode(true));}
     document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category}}));
   }

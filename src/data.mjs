@@ -10,9 +10,9 @@ export const plans = [
   {id:'premium', name:'Premium', price:20000, pages:'7〜12ページ', intro:'多くの情報を整理して、\nしっかり伝えたい方へ'}
 ];
 export const samples = [
- {id:'sola',url:'https://onebe-inc.github.io/sample_food1/',name:'ワンビー食堂',category:'restaurant',label:'オムライス専門店',screenshot:'onebe-restaurant.png',image:'industry-photos.webp',crop:'coffee',headline:'やすらぎの\nひとときを、\n日常に。',sub:'一杯のコーヒーからはじまる、小さな幸せ。',action:'OUR CONCEPT',theme:'coffee'},
- {id:'komorebi',name:'腕火屋',url:'https://onebe-inc.github.io/sample_food2/',category:'restaurant',label:'ラーメン店',screenshot:'udebiya-mobile.png',screenWidth:941,screenHeight:1672,dark:true,image:'seasonal.webp',headline:'季節を味わう、\nしあわせな時間。',sub:'いつもの日に、ちょっといい食卓を。',action:'お品書き',theme:'restaurant'},
- {id:'onebesalon',name:'OneBeSalon',url:'https://onebe-inc.github.io/sample_salon2/',category:'salon',label:'ヘアサロン',screenshot:'onebe-salon-mobile.png',screenWidth:390,screenHeight:850,image:'salon-portrait.webp',theme:'salon'},
+ {id:'sola',url:'https://onebe-inc.github.io/sample_food1/',name:'ワンビー食堂',category:'restaurant',label:'オムライス専門店',screenshot:'omelette-mobile-fit.png',screenWidth:390,screenHeight:790,image:'industry-photos.webp',crop:'coffee',headline:'やすらぎの\nひとときを、\n日常に。',sub:'一杯のコーヒーからはじまる、小さな幸せ。',action:'OUR CONCEPT',theme:'coffee'},
+ {id:'komorebi',name:'腕火屋',url:'https://onebe-inc.github.io/sample_food2/',category:'restaurant',label:'ラーメン店',screenshot:'ramen-mobile-fit.png',screenWidth:390,screenHeight:790,dark:true,image:'seasonal.webp',headline:'季節を味わう、\nしあわせな時間。',sub:'いつもの日に、ちょっといい食卓を。',action:'お品書き',theme:'restaurant'},
+ {id:'onebesalon',name:'OneBeSalon',url:'https://onebe-inc.github.io/sample_salon2/',category:'salon',label:'ヘアサロン',screenshot:'salon-mobile-fit.png',screenWidth:390,screenHeight:790,image:'salon-portrait.webp',theme:'salon'},
  {id:'kokoro',name:'kokoro select',category:'retail',label:'暮らしの雑貨',image:'industry-photos.webp',crop:'retail',headline:'お気に入りで\nつくる、\n心地よい毎日。',sub:'暮らしに、小さな彩りを。',action:'COLLECTION',theme:'retail'},
  {id:'atelier',name:'atelier.',category:'architecture',label:'建築・インテリア',image:'architecture.webp',headline:'暮らしと、ともに。',sub:'いつまでも愛せる空間を、あなたと。',action:'OUR WORKS',theme:'architecture'},
  {id:'nagi',name:'nagi',category:'wellness',label:'リラクゼーション',image:'industry-photos.webp',crop:'spa',headline:'深呼吸する、\nわたしの時間。',sub:'からだと心を、ゆっくり整える。',action:'TREATMENT',theme:'spa'},
