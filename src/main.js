@@ -133,7 +133,7 @@
     const notes=designNotes[sampleId]||designNotes[category];
     $('#dialog-title').textContent=button.dataset.title;
     $('.dialog-category').textContent=$('.sample-caption',button).textContent.trim();
-    $('.dialog-description').textContent=sampleId==='sola'?'おいしさと、お店の空気まで伝わる。':notes[0];
+    $('.dialog-description').textContent=sampleId==='sola'?'おいしさと、お店の空気まで伝わる。':sampleId==='komorebi'?'一杯の迫力と、お店のこだわりを伝える。':notes[0];
 
     $('.dialog-number').textContent=String(currentSample+1).padStart(2,'0');
     const visit=$('.dialog-visit');let target=null;
@@ -141,8 +141,8 @@
     visit.hidden=!target;if(target)visit.href=target;else visit.removeAttribute('href');
     preview.replaceChildren($('.sample-screen',button).cloneNode(true));
     const desktop=$('.desktop-preview');
-    if(sampleId==='sola'){
-      const img=document.createElement('img');img.src='assets/onebe-restaurant-desktop.png';img.alt='ワンビー食堂のPC版デザイン';img.width=1448;img.height=1086;desktop.replaceChildren(img);
+    if(sampleId==='sola'||sampleId==='komorebi'){
+      const img=document.createElement('img');const ramen=sampleId==='komorebi';img.src=ramen?'assets/udebiya-desktop.png':'assets/onebe-restaurant-desktop.png';img.alt=button.dataset.title+'のPC版デザイン';img.width=ramen?1671:1448;img.height=ramen?941:1086;img.style.objectFit=ramen?'contain':'cover';img.style.background=ramen?'#080808':'';desktop.replaceChildren(img);
     }else{desktop.replaceChildren($('.sample-screen',button).cloneNode(true));}
     document.dispatchEvent(new CustomEvent('onebe:sample-detail',{detail:{sampleId,category}}));
   }
